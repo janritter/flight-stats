@@ -1,0 +1,46 @@
+version: "3"
+services:
+  collector:
+    build: .
+    container_name: collector
+    environment:
+      DB_PASSWORD: db_change_me
+      DB_HOST: postgres
+      ORIGIN_AIRPORT: CGN
+      LOG_LEVEL: INFO
+      TZ: 'Europe/Berlin'
+    networks:
+      - flight-stats
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:14.4
+    container_name: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: flightstats
+      POSTGRES_DB: flightstats
+      POSTGRES_PASSWORD: db_change_me
+    networks:
+      - flight-stats
+  
+  metabase:
+    image: metabase/metabase:v0.43.4
+    container_name: flight-stats-metabase
+    ports:
+      - 3000:3000
+    environment:
+      MB_DB_TYPE: postgres
+      MB_DB_DBNAME: flightstats
+      MB_DB_PORT: 5432
+      MB_DB_USER: flightstats
+      MB_DB_PASS: db_change_me
+      MB_DB_HOST: postgres
+      MB_ENCRYPTION_SECRET_KEY: changeRandomString
+    networks:
+      - flight-stats
+
+networks:
+  flight-stats:

@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "flight-delay-stats"
+version = "0.1.0"
+description = ""
+authors = ["Jan Ritter <git@janrtr.de>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pyflightdata = "^0.8.6"
+peewee = "^3.15.1"
+psycopg2-binary = "^2.9.3"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+autopep8 = "^1.6.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
