@@ -11,7 +11,7 @@ peewee = "^3.15.1"
 psycopg2-binary = "^2.9.3"
 
 [tool.poetry.dev-dependencies]
-pytest = "^5.2"
+pytest = "^7.1"
 autopep8 = "^1.6.0"
 
 [build-system]
