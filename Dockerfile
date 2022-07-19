@@ -1,15 +1,23 @@
-FROM python:3.10
+FROM python:3-slim as requirements 
 
-RUN mkdir /app 
-COPY app.py /app
+RUN pip3 install --no-cache-dir --upgrade poetry
 
-COPY pyproject.toml /app 
-WORKDIR /app
+COPY pyproject.toml poetry.lock ./ 
+RUN poetry export -f requirements.txt --without-hashes -o /requirements.txt 
 
-ENV PYTHONPATH=${PYTHONPATH}:${PWD} 
+#​ Final app image 
+FROM python:3-slim as app 
 
-RUN pip3 install poetry
-RUN poetry config virtualenvs.create false
-RUN poetry install --no-dev
+#​ Switching to non-root user appuser
+RUN adduser appuser 
+WORKDIR /home/appuser 
+USER appuser:appuser 
+
+#​ Install requirements 
+COPY --from=requirements requirements.txt . 
+RUN pip3 install --no-cache-dir --user -r requirements.txt
+
+# Add the app code
+COPY app.py /home/appuser/app.py
 
 CMD ["python3", "app.py"]
