@@ -41,9 +41,6 @@ services:
       MB_DB_PASS: db_change_me
       MB_DB_HOST: postgres
       MB_ENCRYPTION_SECRET_KEY: changeRandomString
-      MB_DB_FILE: /metabase-data/metabase.db
-    volumes:
-      - ./metabase-data:/metabase-data
     networks:
       - flight-stats
 
