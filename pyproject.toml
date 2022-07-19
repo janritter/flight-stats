@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "flight-delay-stats"
+name = "flight-stats"
 version = "0.1.0"
 description = ""
 authors = ["Jan Ritter <git@janrtr.de>"]
