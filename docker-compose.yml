@@ -4,6 +4,7 @@ services:
     build: .
     container_name: collector
     environment:
+      DB_USER: flightstats
       DB_PASSWORD: db_change_me
       DB_HOST: postgres
       ORIGIN_AIRPORT: CGN

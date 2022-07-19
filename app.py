@@ -13,7 +13,7 @@ time.tzset()
 
 database = PostgresqlDatabase(
     'flightstats',
-    user='flightstats',
+    user=os.environ['DB_USER'],
     password=os.environ['DB_PASSWORD'],
     host=os.environ['DB_HOST'],
 )
