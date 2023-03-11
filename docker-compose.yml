@@ -30,7 +30,7 @@ services:
       - flight-stats
   
   metabase:
-    image: metabase/metabase:v0.44.0
+    image: metabase/metabase:v0.45.3
     container_name: metabase
     ports:
       - 3000:3000
